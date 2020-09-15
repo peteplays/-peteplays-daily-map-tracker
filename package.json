@@ -19,6 +19,9 @@
     "@react-google-maps/api"
   ],
   "author": "plays.dev@gmail.com",
+  "repository": {
+    "url": "https://github.com/peteplays/peteplays-daily-map-tracker"
+  },
   "license": "ISC",
   "peerDependencies": {
     "react": "^16.13.1",
