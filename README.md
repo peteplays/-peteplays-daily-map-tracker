@@ -1,1 +1,1 @@
-# -peteplays-daily-map-tracker
+# peteplays-daily-map-tracker
