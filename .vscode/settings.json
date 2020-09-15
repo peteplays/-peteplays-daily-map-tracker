@@ -1,0 +1,11 @@
+{
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#0c918a",
+    "statusBar.foreground": "#fefefe"
+  },
+  "cSpell.words": [
+    "gmap",
+    "playslogo",
+    "sourcemap"
+  ]
+}
