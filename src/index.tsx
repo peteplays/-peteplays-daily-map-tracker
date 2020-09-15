@@ -3,7 +3,7 @@ import { GoogleMap, useLoadScript, Marker, Polyline, InfoWindow, Circle } from '
 
 import { config } from './config';
 import { getAllCoordinates, displayDate, displayTime } from './utils';
-import { ICoordinates, IData } from './interfaces';
+import { ICoordinates, IData, IDisplayData, IConfig } from './interfaces';
 
 import './styles.scss';
 
@@ -122,4 +122,10 @@ const DailyMapTracker = ({ dbData }: { dbData: IData[] }) => {
   return isLoaded ? render() : <p className='loading'>Loading</p>
 };
 
+export {
+  IData,
+  ICoordinates,
+  IDisplayData,
+  IConfig,
+}
 export default DailyMapTracker;

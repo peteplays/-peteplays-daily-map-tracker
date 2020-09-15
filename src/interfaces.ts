@@ -15,3 +15,9 @@ export interface IDisplayData {
   dateTime: string;
   coords: ICoordinates;
 }
+
+export interface IConfig {
+  apiKey?: string;
+  homeLatLng?: ICoordinates;
+  mapStyle?: google.maps.MapTypeStyle[];
+}
