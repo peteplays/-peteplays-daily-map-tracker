@@ -73,33 +73,31 @@ const DailyMapTracker = ({ dbData }: { dbData: IData[] }) => {
         {Object.entries(data.times).map(([time, { lat, lng }], i) => {
           setCurrentCircleIndex(i);
 
-          return (
-            <div key={i}>
-              <Circle
-                center={{ lat, lng }}
-                options={{
-                  strokeColor: circleColors[i],
-                  strokeOpacity: 0.8,
-                  strokeWeight: 2,
-                  fillColor: circleColors[i],
-                  fillOpacity: 0.35,
-                }}
-                radius={25}
-                onClick={() => setShowLabel(true)}
-              />
+          <div key={i}>
+            <Circle
+              center={{ lat, lng }}
+              options={{
+                strokeColor: circleColors[i],
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: circleColors[i],
+                fillOpacity: 0.35,
+              }}
+              radius={25}
+              onClick={() => setShowLabel(true)}
+            />
 
-              {showLabel &&
-                <InfoWindow
-                  position={{ lat, lng }}
-                  onCloseClick={() => setShowLabel(false)}
-                >
-                  <div className='infoWindow-dateTime'>
-                    <p>{displayDate(data.date)} - {displayTime(time)}</p>
-                  </div>
-                </InfoWindow>
-              }
-            </div>
-          )
+            {showLabel &&
+              <InfoWindow
+                position={{ lat, lng }}
+                onCloseClick={() => setShowLabel(false)}
+              >
+                <div className='infoWindow-dateTime'>
+                  <p>{displayDate(data.date)} - {displayTime(time)}</p>
+                </div>
+              </InfoWindow>
+            }
+          </div>
         }
 
         )}
