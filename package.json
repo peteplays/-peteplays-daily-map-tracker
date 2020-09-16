@@ -1,6 +1,6 @@
 {
   "name": "@peteplays/daily-map-tracker",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "PetePlays - daily map tracker",
   "main": "dist/index.js",
   "scripts": {
