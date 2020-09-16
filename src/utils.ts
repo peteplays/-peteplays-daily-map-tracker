@@ -1,15 +1,13 @@
 import { IData } from './interfaces';
 
 export const displayTime = (time: string) => {
-  const hour = +time.split(':')[0];
+  const [h, minutes] = time.split(':');
+  const hour = Number(h);
   const convertHour = hour > 12
     ? hour - 12
     : hour;
-  const minutesSeconds = time.length === 8
-    ? time.slice(3, -3)
-    : time.slice(2, -3)
 
-  return `${convertHour}:${minutesSeconds}${hour >= 12 ? 'pm' : 'am'}`;
+  return `${convertHour}:${minutes}${hour >= 12 ? 'pm' : 'am'}`;
 };
 
 export const displayDate = (date: string) => {
