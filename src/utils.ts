@@ -20,3 +20,31 @@ export const displayDate = (date: string) => {
 export const getAllCoordinates = (data: IData) => {
   return Object.entries(data.times).map(([_, { lat, lng }]) => ({ lat, lng }));
 }
+
+export const pathsColors = (data: any[]) => {
+  interface IPathAcc {
+    pathIdx: number;
+    paths: string[];
+  };
+
+  const colors = ['#005599', '#33aa82', '#aa3361', '#dd5f4e', '#a44edd'];
+  const pathAcc: IPathAcc = {
+    pathIdx: 0,
+    paths: [],
+  };
+
+  const r = data.reduce((acc: IPathAcc) => {
+    let pathIdx = acc.pathIdx;
+
+    if (pathIdx >= colors.length) {
+      pathIdx = 0;
+    }
+
+    acc.paths.push(colors[pathIdx]);
+    acc.pathIdx = pathIdx + 1;
+
+    return acc;
+  }, pathAcc);
+
+  return r.paths;
+}

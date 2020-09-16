@@ -2,7 +2,7 @@ import * as React from 'react'
 import { GoogleMap, useLoadScript, Marker, Polyline, InfoWindow, Circle } from '@react-google-maps/api';
 
 import { config } from './config';
-import { getAllCoordinates, displayDate, displayTime } from './utils';
+import { getAllCoordinates, displayDate, displayTime, pathsColors } from './utils';
 import { ICoordinates, IData, IDisplayData, IConfig } from './interfaces';
 
 import './styles.scss';
@@ -19,6 +19,8 @@ const DailyMapTracker = ({ dbData }: { dbData: IData[] }) => {
   const [dateInput, setDateInput] = React.useState(allDates[0]);
   const [selectedCoordinates, setSelectedCoordinates] = React.useState<ICoordinates[]>(getAllCoordinates(dbData[0]));
   const [showLabel, setShowLabel] = React.useState(false);
+
+  const circleColors = pathsColors(Object.entries(data.times));
 
   const setSelect = (date: string) => {
     const selectedDateData = dbData.filter(d => d.date === date)[0];
@@ -72,10 +74,10 @@ const DailyMapTracker = ({ dbData }: { dbData: IData[] }) => {
             <Circle
               center={{ lat, lng }}
               options={{
-                strokeColor: '#059',
+                strokeColor: circleColors[i],
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
-                fillColor: '#059',
+                fillColor: circleColors[i],
                 fillOpacity: 0.35,
               }}
               radius={25}
