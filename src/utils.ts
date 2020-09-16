@@ -27,7 +27,7 @@ export const pathsColors = (data: any[]) => {
     paths: string[];
   };
 
-  const colors = ['#005599', '#33aa82', '#aa3361', '#dd5f4e', '#a44edd'];
+  const colors = ['#005599', '#33aa82', '#aa3361', '#a44edd'];
   const pathAcc: IPathAcc = {
     pathIdx: 0,
     paths: [],

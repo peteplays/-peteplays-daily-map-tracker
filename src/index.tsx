@@ -19,7 +19,6 @@ const DailyMapTracker = ({ dbData }: { dbData: IData[] }) => {
   const [dateInput, setDateInput] = React.useState(allDates[0]);
   const [selectedCoordinates, setSelectedCoordinates] = React.useState<ICoordinates[]>(getAllCoordinates(dbData[0]));
   const [showLabel, setShowLabel] = React.useState(false);
-  const [currentCircleIndex, setCurrentCircleIndex] = React.useState(0);
 
   const circleColors = pathsColors(Object.entries(data.times));
 
@@ -70,9 +69,7 @@ const DailyMapTracker = ({ dbData }: { dbData: IData[] }) => {
           </div>
         </InfoWindow>
 
-        {Object.entries(data.times).map(([time, { lat, lng }], i) => {
-          setCurrentCircleIndex(i);
-
+        {Object.entries(data.times).map(([time, { lat, lng }], i) =>
           <div key={i}>
             <Circle
               center={{ lat, lng }}
@@ -98,20 +95,18 @@ const DailyMapTracker = ({ dbData }: { dbData: IData[] }) => {
               </InfoWindow>
             }
           </div>
-        }
-
         )}
 
         <Polyline
           path={selectedCoordinates}
           options={{
             strokeWeight: 8,
-            strokeColor: circleColors[currentCircleIndex],
+            strokeColor: '#fb9622',
             strokeOpacity: 0.6,
             icons: [{
               icon: {
                 path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
-                strokeColor: circleColors[currentCircleIndex + 1],
+                strokeColor: '#059',
                 fillOpacity: 0.7,
                 scale: 1,
               },
