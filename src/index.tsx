@@ -19,6 +19,7 @@ const DailyMapTracker = ({ dbData }: { dbData: IData[] }) => {
   const [dateInput, setDateInput] = React.useState(allDates[0]);
   const [selectedCoordinates, setSelectedCoordinates] = React.useState<ICoordinates[]>(getAllCoordinates(dbData[0]));
   const [showLabel, setShowLabel] = React.useState(false);
+  const [currentCircleIndex, setCurrentCircleIndex] = React.useState(0);
 
   const circleColors = pathsColors(Object.entries(data.times));
 
@@ -69,44 +70,50 @@ const DailyMapTracker = ({ dbData }: { dbData: IData[] }) => {
           </div>
         </InfoWindow>
 
-        {Object.entries(data.times).map(([time, { lat, lng }], i) =>
-          <div key={i}>
-            <Circle
-              center={{ lat, lng }}
-              options={{
-                strokeColor: circleColors[i],
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: circleColors[i],
-                fillOpacity: 0.35,
-              }}
-              radius={25}
-              onClick={() => setShowLabel(true)}
-            />
+        {Object.entries(data.times).map(([time, { lat, lng }], i) => {
+          setCurrentCircleIndex(i);
 
-            {showLabel &&
-              <InfoWindow
-                position={{ lat, lng }}
-                onCloseClick={() => setShowLabel(false)}
-              >
-                <div className='infoWindow-dateTime'>
-                  <p>{displayDate(data.date)} - {displayTime(time)}</p>
-                </div>
-              </InfoWindow>
-            }
-          </div>
+          return (
+            <div key={i}>
+              <Circle
+                center={{ lat, lng }}
+                options={{
+                  strokeColor: circleColors[i],
+                  strokeOpacity: 0.8,
+                  strokeWeight: 2,
+                  fillColor: circleColors[i],
+                  fillOpacity: 0.35,
+                }}
+                radius={25}
+                onClick={() => setShowLabel(true)}
+              />
+
+              {showLabel &&
+                <InfoWindow
+                  position={{ lat, lng }}
+                  onCloseClick={() => setShowLabel(false)}
+                >
+                  <div className='infoWindow-dateTime'>
+                    <p>{displayDate(data.date)} - {displayTime(time)}</p>
+                  </div>
+                </InfoWindow>
+              }
+            </div>
+          )
+        }
+
         )}
 
         <Polyline
           path={selectedCoordinates}
           options={{
             strokeWeight: 8,
-            strokeColor: '#fb9622',
+            strokeColor: circleColors[currentCircleIndex],
             strokeOpacity: 0.6,
             icons: [{
               icon: {
                 path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
-                strokeColor: '#059',
+                strokeColor: circleColors[currentCircleIndex + 1],
                 fillOpacity: 0.7,
                 scale: 1,
               },
