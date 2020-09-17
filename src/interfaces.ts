@@ -1,5 +1,6 @@
 export interface IData {
   _id?: any;
+  type?: string;
   date: string;
   times: {
     [time: string]: ICoordinates;
